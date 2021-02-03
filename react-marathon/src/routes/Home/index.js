@@ -141,17 +141,12 @@ const POKEMONS = [
     }
 ]
 
-const HomePage = ({onChangePage}) => {
-    const handlerClickButton = (page) => {
-        onChangePage && onChangePage(page);
-    }
-
+const HomePage = () => {
     return (
         <>
             <Header
                 title="Simple title"
                 descr="And the same simple Description!"
-                onClickButton={handlerClickButton}
             />
             <Layout
                 id="1"

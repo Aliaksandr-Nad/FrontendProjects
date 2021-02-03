@@ -8,7 +8,7 @@ import NotFound from "./routes/NotFound";
 import ContactPage from "./routes/Contact";
 import AboutPage from "./routes/About";
 
-import s from "./components/style.module.css"
+import s from "./App.module.css"
 import Footer from "./components/Footer";
 
 function App() {
