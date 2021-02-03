@@ -12,7 +12,7 @@ function MenuHeader({bgActive}) {
 
     return (
         <>
-            <Menu isActive={isActive}/>
+            <Menu isActive={isActive} handlerHamburger={handlerHamburger}/>
             <Navbar isActive={isActive} bgActive={bgActive} onClickHamburger={handlerHamburger}/>
         </>
     );

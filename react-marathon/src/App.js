@@ -7,9 +7,9 @@ import MenuHeader from "./components/MenuHeader";
 import NotFound from "./routes/NotFound";
 import ContactPage from "./routes/Contact";
 import AboutPage from "./routes/About";
+import Footer from "./components/Footer";
 
 import s from "./App.module.css"
-import Footer from "./components/Footer";
 
 function App() {
     const match = useRouteMatch('/');

@@ -21,7 +21,7 @@ const MENU = [
     },
 ]
 
-function Menu({isActive}) {
+function Menu({isActive, handlerHamburger}) {
     return (
         <div className={cn(s.menuContainer, {
             [s.active]: isActive === true,
@@ -31,7 +31,7 @@ function Menu({isActive}) {
             <ul>
                 {
                     MENU.map(({title, to}, index) => (
-                        <li key={index}>
+                        <li key={index} onClick={handlerHamburger}>
                             <Link to={to}>{title}</Link>
                         </li>
                     ))
