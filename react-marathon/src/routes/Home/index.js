@@ -148,7 +148,6 @@ const HomePage = ({onChangePage}) => {
 
     return (
         <>
-            <MenuHeader/>
             <Header
                 title="Simple title"
                 descr="And the same simple Description!"
@@ -188,7 +187,6 @@ const HomePage = ({onChangePage}) => {
             >
                 <p>"This is Last description"</p>
             </Layout>
-            <Footer/>
         </>
     );
 }

@@ -1,24 +1,23 @@
-import React from 'react';
 import cn from "classnames"
-
+import {Link} from "react-router-dom"
 import s from './Menu.module.css'
 
 const MENU = [
     {
         title: 'HOME',
-        to: '#welcome'
+        to: '/'
     },
     {
         title: 'GAME',
-        to: '#game'
+        to: '/game'
     },
     {
         title: 'ABOUT',
-        to: '#about'
+        to: '/about'
     },
     {
         title: 'CONTACT',
-        to: '#contact'
+        to: '/contact'
     },
 ]
 
@@ -33,7 +32,7 @@ function Menu({isActive}) {
                 {
                     MENU.map(({title, to}, index) => (
                         <li key={index}>
-                            <a href={to}>{title}</a>
+                            <Link to={to}>{title}</Link>
                         </li>
                     ))
                 }
