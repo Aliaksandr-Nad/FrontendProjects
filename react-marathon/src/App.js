@@ -4,18 +4,19 @@ import GamePage from "./routes/Game";
 
 function App() {
     const [page, setPage] = useState('app');
+
     const handlerChangePage = (page) => {
         setPage(page);
-
     }
+
     switch (page) {
         case "app":
             return <HomePage onChangePage={handlerChangePage}/>
         case "game":
             return <GamePage onChangePage={handlerChangePage}/>
         default:
-            return <HomePage onChangePage={handlerChangePage}/>
+            return <HomePage/>
     }
-}
+};
 
 export default App;
