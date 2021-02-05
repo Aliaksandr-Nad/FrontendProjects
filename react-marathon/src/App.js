@@ -13,7 +13,6 @@ import s from "./App.module.css"
 
 function App() {
     const match = useRouteMatch('/');
-    console.log(match);
 
     return (
         <Switch>
