@@ -1,0 +1,14 @@
+.buttonWrapper{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: auto;
+    width: 350px;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
