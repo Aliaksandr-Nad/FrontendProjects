@@ -2,6 +2,7 @@ import {useHistory} from "react-router-dom";
 import {useState, useEffect, useContext} from "react"
 
 import {FirebaseContext} from "../../../../context/firebaseContext";
+import {PokemonContext} from "../../../../context/pokemonContext";
 
 import Layout from "../../../../components/Layout";
 import PokemonCard from "../../../../components/PokemonCard";
@@ -9,34 +10,36 @@ import PokemonCard from "../../../../components/PokemonCard";
 import s from "./style.module.css";
 
 
-const StartPage = ({setSelectedPokemon}) => {
+const StartPage = () => {
     const firebaseContext = useContext(FirebaseContext);
+    const pokemonContext = useContext(PokemonContext);
+    const history = useHistory();
     const [pokemons, setPokemons] = useState({});
 
     useEffect(() => {
         firebaseContext.getPokemonSocket((pokemons) => {
             setPokemons(pokemons);
         })
+
+        pokemonContext.pokemons = {};
+
+        return () => firebaseContext.offPokemonSocket();
     }, []);
 
-    const handlerPokemonClick = (id) => {
-        setPokemons(prevState => {
-            return Object.entries(prevState).reduce((acc, item) => {
-                const pokemon = {...item[1]};
-                if (pokemon.id === id) {
-                    pokemon.isSelected = !pokemon.isSelected;
-                }
-                acc[item[0]] = pokemon;
+    const handlerPokemonClick = (key) => {
+        const pokemon = {...pokemons[key]};
+        pokemonContext.onSelectedPokemons(key, pokemon);
 
-                return acc;
-            }, {});
-        });
+        setPokemons(prevState => ({
+            ...prevState,
+            [key]: {
+                ...prevState[key],
+                isSelected: !prevState[key].isSelected
+            }
+        }));
     }
 
-    const history = useHistory();
     const HandlerStartGame = () => {
-        const selected = Object.entries(pokemons).filter(x => x[1].isSelected === true);
-        setSelectedPokemon(selected);
         history.push('/game/board');
     }
 
@@ -49,7 +52,10 @@ const StartPage = ({setSelectedPokemon}) => {
             >
                 <div className={s.buttonWrapper}>
                     <p>Start Page!</p>
-                    <button onClick={HandlerStartGame}>
+                    <button
+                        onClick={HandlerStartGame}
+                        disabled={Object.keys(pokemonContext.pokemons).length < 5}
+                    >
                         Start Game
                     </button>
                 </div>
@@ -63,8 +69,14 @@ const StartPage = ({setSelectedPokemon}) => {
                                 id={id}
                                 type={type}
                                 values={values}
+                                className={s.Card}
+                                isActive={true}
                                 isSelected={isSelected}
-                                handlerClick={handlerPokemonClick}/>)
+                                handlerClick={() => {
+                                    if (Object.keys(pokemonContext.pokemons).length < 5 || isSelected) {
+                                        handlerPokemonClick(key)
+                                    }
+                                }}/>)
                     }
                 </div>
             </Layout>

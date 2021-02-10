@@ -1,14 +1,17 @@
-.buttonWrapper{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    margin: auto;
-    width: 350px;
+.flex {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 40px;
 }
 
-.flex {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+.buttonWrapper {
+    text-align: center;
+    padding: 2rem;
+}
+
+.Card {
+    width: 310px;
+    height: 400px;
+    cursor: pointer;
+    justify-self: center;
 }
