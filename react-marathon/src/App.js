@@ -17,7 +17,7 @@ import s from "./App.module.css"
 
 function App() {
     const location = useLocation();
-    const isPadding = location.pathname === '/' || location.pathname === '/game/board'
+    const isPadding = location.pathname === '/' || location.pathname === '/home' || location.pathname === '/game/board'
 
     return (
         <FirebaseContext.Provider value={new Firebase()}>

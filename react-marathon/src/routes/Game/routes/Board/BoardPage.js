@@ -26,11 +26,11 @@ const counterWin = (board, player1, player2) => {
 }
 
 const BoardPage = () => {
-    const {pokemons} = useContext(PokemonContext);
+    const {player1Pokemons, onEnemyPokemons} = useContext(PokemonContext);
 
     const [board, setBoard] = useState([]);
     const [player1, setPlayer1] = useState(() => {
-        return Object.values(pokemons).map(item => ({
+        return Object.values(player1Pokemons).map(item => ({
             ...item,
             possession: 'blue',
         }))
@@ -38,11 +38,6 @@ const BoardPage = () => {
     const [player2, setPlayer2] = useState([]);
     const [choiceCard, setChoiceCard] = useState([null]);
     const [steps, setSteps] = useState(0);
-
-    const history = useHistory();
-    if (Object.keys(pokemons).length === 0) {
-        history.replace('/game');
-    }
 
     useEffect(async () => {
         const boardResponse = await fetch('https://reactmarathon-api.netlify.app/api/board');
@@ -91,6 +86,11 @@ const BoardPage = () => {
         }
     }
 
+    const history = useHistory();
+    if (player1Pokemons.length === 0) {
+        history.replace('/game');
+    }
+
     useEffect(() => {
         if (steps === 9) {
             const [count1, count2] = counterWin(board, player2, player2);
@@ -107,13 +107,12 @@ const BoardPage = () => {
 
     return (
         <div className={s.root}>
-            <div className={s.playerOne}>
-                <PlayerBoard
-                    player={1}
-                    cards={player1}
-                    onClickCard={(card) => setChoiceCard(card)}
-                />
-            </div>
+            <PlayerBoard
+                wrapper={s.playerOne}
+                player={1}
+                cards={player1}
+                onClickCard={(card) => setChoiceCard(card)}
+            />
             <div className={s.board}>
                 {
                     board.map(item => (
@@ -129,13 +128,12 @@ const BoardPage = () => {
                     ))
                 }
             </div>
-            <div className={s.playerTwo}>
-                <PlayerBoard
-                    player={2}
-                    cards={player2}
-                    onClickCard={(card) => setChoiceCard(card)}
-                />
-            </div>
+            <PlayerBoard
+                wrapper={s.playerTwo}
+                player={2}
+                cards={player2}
+                onClickCard={(card) => setChoiceCard(card)}
+            />
         </div>
     );
 };

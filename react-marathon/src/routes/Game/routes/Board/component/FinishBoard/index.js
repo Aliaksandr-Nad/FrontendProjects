@@ -5,11 +5,11 @@ import PokemonCard from "../../../../../../components/PokemonCard";
 
 import s from "./style.module.css";
 
-const PlayerBoard = ({wrapper, player, cards, onClickCard}) => {
+const FinishBoard = ({player, cards, onClickCard}) => {
     const [isSelected, setSelected] = useState(null);
 
     return (
-        <div className={wrapper}>
+        <div className={cn(s.flex)}>
             {
                 cards.map((item) => (
                     <div className={cn(s.cardBoard, {
@@ -30,7 +30,8 @@ const PlayerBoard = ({wrapper, player, cards, onClickCard}) => {
                             id={item.id}
                             type={item.type}
                             values={item.values}
-                            minimize
+                            className={s.Card}
+
                             isActive
                         />
                     </div>
@@ -40,4 +41,4 @@ const PlayerBoard = ({wrapper, player, cards, onClickCard}) => {
     );
 };
 
-export default PlayerBoard;
+export default FinishBoard;

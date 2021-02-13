@@ -12,7 +12,7 @@ import s from "./style.module.css";
 
 const StartPage = () => {
     const firebaseContext = useContext(FirebaseContext);
-    const pokemonContext = useContext(PokemonContext);
+    const {player1Pokemons, onSelectedPokemons, cleanPokemonContext} = useContext(PokemonContext);
     const history = useHistory();
     const [pokemons, setPokemons] = useState({});
 
@@ -20,15 +20,14 @@ const StartPage = () => {
         firebaseContext.getPokemonSocket((pokemons) => {
             setPokemons(pokemons);
         })
-
-        pokemonContext.pokemons = {};
+        cleanPokemonContext();
 
         return () => firebaseContext.offPokemonSocket();
     }, []);
 
     const handlerPokemonClick = (key) => {
         const pokemon = {...pokemons[key]};
-        pokemonContext.onSelectedPokemons(key, pokemon);
+        onSelectedPokemons(pokemon);
 
         setPokemons(prevState => ({
             ...prevState,
@@ -54,7 +53,7 @@ const StartPage = () => {
                     <p>Start Page!</p>
                     <button
                         onClick={HandlerStartGame}
-                        disabled={Object.keys(pokemonContext.pokemons).length < 5}
+                        disabled={Object.keys(player1Pokemons).length < 5}
                     >
                         Start Game
                     </button>
@@ -73,7 +72,7 @@ const StartPage = () => {
                                 isActive={true}
                                 isSelected={isSelected}
                                 handlerClick={() => {
-                                    if (Object.keys(pokemonContext.pokemons).length < 5 || isSelected) {
+                                    if (Object.keys(player1Pokemons).length < 5 || isSelected) {
                                         handlerPokemonClick(key)
                                     }
                                 }}/>)

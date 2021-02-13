@@ -4,11 +4,6 @@
     grid-gap: 40px;
 }
 
-.buttonWrapper {
-    text-align: center;
-    padding: 2rem;
-}
-
 .Card {
     height: 370px;
     cursor: pointer;
