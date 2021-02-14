@@ -5,7 +5,7 @@ import PokemonCard from "../../../../../../components/PokemonCard";
 
 import s from "./style.module.css";
 
-const FinishBoard = ({player, cards, onClickCard}) => {
+const FinishBoard = ({disableClick, cards, onClickCard}) => {
     const [isSelected, setSelected] = useState(null);
 
     return (
@@ -16,11 +16,10 @@ const FinishBoard = ({player, cards, onClickCard}) => {
                         [s.selected]: isSelected === item.id
                     })}
                          onClick={() => {
-                             setSelected(item.id)
-                             onClickCard && onClickCard({
-                                 player,
-                                 ...item,
-                             })
+                             if (!disableClick) {
+                                 setSelected(item.id)
+                                 onClickCard && onClickCard(item)
+                             }
                          }}
                     >
                         <PokemonCard
@@ -31,7 +30,6 @@ const FinishBoard = ({player, cards, onClickCard}) => {
                             type={item.type}
                             values={item.values}
                             className={s.Card}
-
                             isActive
                         />
                     </div>

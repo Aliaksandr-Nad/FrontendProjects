@@ -22,11 +22,11 @@ const counterWin = (board, player1, player2) => {
         }
     })
 
-    return[player1Count, player2Count];
+    return [player1Count, player2Count];
 }
 
 const BoardPage = () => {
-    const {player1Pokemons, onEnemyPokemons} = useContext(PokemonContext);
+    const {player1Pokemons, onEnemyPokemons, setGameResult} = useContext(PokemonContext);
 
     const [board, setBoard] = useState([]);
     const [player1, setPlayer1] = useState(() => {
@@ -52,6 +52,7 @@ const BoardPage = () => {
                 possession: 'red',
             }))
         });
+        onEnemyPokemons(player2Request.data);
     }, []);
 
     const handlerClickBoardPlate = async (position) => {
@@ -71,11 +72,11 @@ const BoardPage = () => {
             });
             const request = await res.json();
 
-            if (choiceCard.player === 1){
+            if (choiceCard.player === 1) {
                 setPlayer1(prevState => prevState.filter(item => item.id !== choiceCard.id));
             }
 
-            if (choiceCard.player === 2){
+            if (choiceCard.player === 2) {
                 setPlayer2(prevState => prevState.filter(item => item.id !== choiceCard.id));
             }
 
@@ -96,14 +97,16 @@ const BoardPage = () => {
             const [count1, count2] = counterWin(board, player2, player2);
 
             if (count1 > count2){
-                alert('WIN');
+                setGameResult('WIN');
             } else if(count1 < count2){
-                alert('LOSE');
+                setGameResult('LOSE');
             }else {
-                alert('DRAW');
+                setGameResult('DRAW');
             }
+
+            history.replace('/game/finish');
         }
-    },[steps]);
+    }, [steps]);
 
     return (
         <div className={s.root}>

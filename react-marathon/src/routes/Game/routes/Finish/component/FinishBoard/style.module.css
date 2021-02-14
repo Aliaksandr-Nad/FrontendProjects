@@ -9,3 +9,11 @@
     cursor: pointer;
     justify-self: center;
 }
+
+.cardBoard.selected{
+    margin-top: -30px;
+}
+
+.cardBoard.selected ::after{
+    border-color: aqua;
+}
