@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 import {useState} from 'react'
 
 function MenuHeader({bgActive}) {
-    const [isActive, setActive] = useState(null);
+    const [isActive, setActive] = useState(false);
 
     const handlerHamburger = () => {
         setActive(prevState => !prevState)
