@@ -15,7 +15,6 @@ firebase.initializeApp(firebaseConfig);
 
 class Firebase{
     constructor() {
-
         this.fire = firebase;
         this.db = this.fire.database();
     }
@@ -44,4 +43,6 @@ class Firebase{
     }
 }
 
-export default Firebase;
+const FirebaseClass = new Firebase();
+
+export default FirebaseClass;

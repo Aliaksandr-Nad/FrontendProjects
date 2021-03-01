@@ -2,7 +2,7 @@ import {useLocation, Route, Switch, Redirect} from "react-router-dom";
 import cn from "classnames"
 
 import {FirebaseContext} from "./context/firebaseContext";
-import Firebase from "./service/firebase";
+import FirebaseClass from "./service/firebase";
 
 import HomePage from "./routes/Home";
 import GamePage from "./routes/Game/routes";
@@ -20,7 +20,7 @@ function App() {
     const isPadding = location.pathname === '/' || location.pathname === '/home' || location.pathname === '/game/board'
 
     return (
-        <FirebaseContext.Provider value={new Firebase()}>
+        <FirebaseContext.Provider value={FirebaseClass}>
             <Switch>
                 <Route path="/404" component={NotFound}/>
 

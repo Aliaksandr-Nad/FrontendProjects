@@ -1,10 +1,7 @@
 import Header from "../../components/Header";
 import Layout from "../../components/Layout";
-import PokemonCard from "../../components/PokemonCard";
 
 import bg from "../../images/bg.jpg"
-import POKEMONS from "./../../components/POKEMONS.json"
-import s from "./style.module.css"
 
 const HomePage = () => {
     return (
@@ -27,18 +24,6 @@ const HomePage = () => {
                     will be compared. If the rank of the opponent's card is higher than the player's card, the player's
                     card will be captured and turned into the opponent's color. If the player's rank is higher, the
                     opponent's card will be captured and changed into the player's color instead.</p>
-            </Layout>
-            <Layout
-                id="2"
-                title="Cool layout !)"
-                colorBg="#040497"
-            >
-                <div className={s.flex}>
-                    {
-                        POKEMONS.map(item => <PokemonCard key={item.id} id={item.id} name={item.name} type={item.type}
-                                                          values={item.values} img={item.img}/>)
-                    }
-                </div>
             </Layout>
             <Layout
                 id="3"
