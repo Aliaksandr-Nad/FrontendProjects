@@ -1,14 +1,5 @@
-.wrap{
-    min-height: calc(100vh - 100px);
-    padding: 96px 32px 24px;
-}
-
-.wrap.isHomePage{
-    padding: 0;
-}
-
-button,
-button:visited {
+.secondButton,
+.secondButton:visited {
     width: 100%;
     max-width: 240px;
     padding: 1rem;
@@ -22,8 +13,8 @@ button:visited {
     box-sizing: border-box;
 }
 
-button,
-button:visited {
+.secondButton,
+.secondButton:visited {
     background: #f300b4;
     border: 1px solid transparent;
     color: #fafafa;
@@ -31,7 +22,7 @@ button:visited {
     outline: none;
 }
 
-button:hover {
+.secondButton:hover {
     background: transparent;
     border: 1px solid #f300b4;
     color: #f300b4;
@@ -39,7 +30,7 @@ button:hover {
     outline: none;
 }
 
-button:active {
+.secondButton:active {
     background: transparent;
     border: 1px solid #f300b4;
     color: #f300b4;
@@ -50,12 +41,12 @@ button:active {
     border-right: 2px solid;
 }
 
-button:disabled {
+.secondButton:disabled {
     opacity: .4;
     cursor: not-allowed;
 }
 
-button:disabled:hover {
+.secondButton:disabled:hover {
     background: #f300b4;
     border: 1px solid transparent;
     color: #fafafa;

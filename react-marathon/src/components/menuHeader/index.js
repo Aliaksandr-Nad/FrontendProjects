@@ -10,6 +10,7 @@ import LoginForm from "../loginForm";
 function MenuHeader({bgActive}) {
     const [isActive, setActive] = useState(null);
     const [isOpenModal, setOpenModal] = useState(null);
+    const [connectionUrl, setConnectionUrl] = useState('');
 
     const handlerHamburger = () => {
         setActive(prevState => !prevState)
@@ -18,6 +19,10 @@ function MenuHeader({bgActive}) {
     const handlerClickLogin = () => {
         setOpenModal(prevState => !prevState)
     }
+
+    const key = 'AIzaSyCt91QcxAv0f7zM-3pDqEaLqLI5t6HdB2k';
+    const reg = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=';
+    const login = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=';
 
     const handlerSubmitMenuForm = async ({email, password}) => {
         const requestOptions = {
@@ -28,9 +33,8 @@ function MenuHeader({bgActive}) {
                 returnSecureToken: true,
             })
         };
-        const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCt91QcxAv0f7zM-3pDqEaLqLI5t6HdB2k', requestOptions)
+        const response = await fetch(login+key, requestOptions)
             .then(res => res.json());
-        console.log("####: response", response);
         if (response.hasOwnProperty('error')){
             NotificationManager.error(response.error.message, 'Wrong!');
         }else {
@@ -53,9 +57,11 @@ function MenuHeader({bgActive}) {
             <Modal
                 title="LOGIN"
                 isOpen={isOpenModal}
+
                 oncloseModal={handlerClickLogin}
             >
                 <LoginForm
+                    isOpen={isOpenModal}
                     onSubmit={handlerSubmitMenuForm}
                 />
             </Modal>
