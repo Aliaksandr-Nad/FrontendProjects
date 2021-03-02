@@ -4,14 +4,14 @@ import {FirebaseContext} from "./context/firebaseContext";
 import {NotificationContainer} from "react-notifications";
 
 import FirebaseClass from "./service/firebase";
-import HomePage from "./routes/Home";
+import HomePage from "./routes/home";
 
-import GamePage from "./routes/Game/routes";
-import MenuHeader from "./components/MenuHeader";
-import NotFound from "./routes/NotFound";
-import ContactPage from "./routes/Contact";
-import AboutPage from "./routes/About";
-import Footer from "./components/Footer";
+import GamePage from "./routes/game/routes";
+import MenuHeader from "./components/menuHeader";
+import NotFound from "./routes/notFound";
+import ContactPage from "./routes/contact";
+import AboutPage from "./routes/about";
+import Footer from "./components/footer";
 
 import cn from "classnames"
 import 'react-notifications/lib/notifications.css'

@@ -3,8 +3,8 @@ import {useHistory} from "react-router-dom"
 
 import {PokemonContext} from "../../../../context/pokemonContext";
 
-import PokemonCard from "../../../../components/PokemonCard";
-import PlayerBoard from "./component/PlayerBoard";
+import PokemonCard from "../../../../components/pokemonCard";
+import PlayerBoard from "./component/playerBoard";
 
 import s from './style.module.css';
 

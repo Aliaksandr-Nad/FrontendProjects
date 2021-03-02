@@ -1,5 +1,5 @@
 import {useHistory} from "react-router-dom"
-import s from './Header.module.css';
+import s from './style.module.css';
 
 const Header = ({title, descr}) => {
     const history = useHistory();

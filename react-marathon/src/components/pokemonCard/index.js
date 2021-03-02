@@ -1,6 +1,5 @@
 import cn from "classnames"
-
-import s from "./PokemonCard.Module.css"
+import s from "./style.module.css"
 
 const PokemonCard = ({name, img, id, type, values, minimize, className, isActive, isSelected, possession,  handlerClick}) => {
     const Click = () => {

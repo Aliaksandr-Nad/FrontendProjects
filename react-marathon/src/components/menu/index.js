@@ -1,6 +1,7 @@
-import cn from "classnames"
 import {Link} from "react-router-dom"
-import s from './Menu.module.css'
+
+import cn from "classnames"
+import s from './style.module.css'
 
 const MENU = [
     {

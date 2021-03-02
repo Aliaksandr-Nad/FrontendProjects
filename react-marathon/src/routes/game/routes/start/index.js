@@ -3,8 +3,8 @@ import {useState, useEffect, useContext} from "react"
 
 import {PokemonContext} from "../../../../context/pokemonContext";
 
-import Layout from "../../../../components/Layout";
-import PokemonCard from "../../../../components/PokemonCard";
+import Layout from "../../../../components/layout";
+import PokemonCard from "../../../../components/pokemonCard";
 
 import {useDispatch, useSelector} from "react-redux";
 import {getPokemonsAsync, selectPokemonsData} from "../../../../store/pokemons";

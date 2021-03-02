@@ -3,9 +3,9 @@ import {useState} from "react";
 
 import {PokemonContext} from "../../../context/pokemonContext";
 
-import StartPage from "./Start/StartPage";
-import BoardPage from "./Board/BoardPage";
-import FinishPage from "./Finish/FinishPage";
+import StartPage from "./start";
+import BoardPage from "./board";
+import FinishPage from "./finish";
 
 const GamePage = () => {
     const match = useRouteMatch();

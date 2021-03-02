@@ -2,10 +2,10 @@ import {useState} from 'react'
 
 import {NotificationManager} from "react-notifications";
 
-import Menu from "./Menu";
-import Navbar from "./Navbar";
-import Modal from "./modal/index";
-import LoginForm from "./loginForm";
+import Menu from "../menu";
+import Navbar from "../navbar";
+import Modal from "../modal";
+import LoginForm from "../loginForm";
 
 function MenuHeader({bgActive}) {
     const [isActive, setActive] = useState(null);

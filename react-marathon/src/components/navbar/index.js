@@ -1,9 +1,9 @@
 import React from 'react';
+
+import {ReactComponent as LoginSVG} from '../../images/login.svg'
+
 import cn from 'classnames'
-
-import {ReactComponent as LoginSVG} from '../images/login.svg'
-
-import s from './Navbar.module.css'
+import s from './style.module.css'
 
 
 function Navbar({onClickHamburger, isActive, bgActive = false, onClickLogin}) {

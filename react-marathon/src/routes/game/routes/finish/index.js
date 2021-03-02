@@ -3,10 +3,9 @@ import {useHistory} from "react-router-dom";
 
 import {PokemonContext} from "../../../../context/pokemonContext";
 
-import FinishBoard from "./component/FinishBoard";
-import Layout from "../../../../components/Layout";
+import FinishBoard from "./component/finishBoard";
+import Layout from "../../../../components/layout";
 
-import s from './style.module.css';
 import {FirebaseContext} from "../../../../context/firebaseContext";
 
 const FinishPage = () => {

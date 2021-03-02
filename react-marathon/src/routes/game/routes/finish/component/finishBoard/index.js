@@ -1,26 +1,25 @@
 import {useState} from 'react';
 import cn from 'classnames';
 
-import PokemonCard from "../../../../../../components/PokemonCard";
+import PokemonCard from "../../../../../../components/pokemonCard";
 
 import s from "./style.module.css";
 
-const PlayerBoard = ({wrapper, player, cards, onClickCard}) => {
+const FinishBoard = ({disableClick, cards, onClickCard}) => {
     const [isSelected, setSelected] = useState(null);
 
     return (
-        <div className={wrapper}>
+        <div className={cn(s.flex)}>
             {
                 cards.map((item) => (
                     <div className={cn(s.cardBoard, {
                         [s.selected]: isSelected === item.id
                     })}
                          onClick={() => {
-                             setSelected(item.id)
-                             onClickCard && onClickCard({
-                                 player,
-                                 ...item,
-                             })
+                             if (!disableClick) {
+                                 setSelected(item.id)
+                                 onClickCard && onClickCard(item)
+                             }
                          }}
                     >
                         <PokemonCard
@@ -30,7 +29,7 @@ const PlayerBoard = ({wrapper, player, cards, onClickCard}) => {
                             id={item.id}
                             type={item.type}
                             values={item.values}
-                            minimize
+                            className={s.Card}
                             isActive
                         />
                     </div>
@@ -40,4 +39,4 @@ const PlayerBoard = ({wrapper, player, cards, onClickCard}) => {
     );
 };
 
-export default PlayerBoard;
+export default FinishBoard;
