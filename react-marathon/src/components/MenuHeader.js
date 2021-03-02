@@ -1,13 +1,15 @@
-import React from 'react';
+import {useState} from 'react'
+
+import {NotificationManager} from "react-notifications";
+
 import Menu from "./Menu";
 import Navbar from "./Navbar";
 import Modal from "./modal/index";
-import {useState} from 'react'
 import LoginForm from "./loginForm";
 
 function MenuHeader({bgActive}) {
-    const [isActive, setActive] = useState(false);
-    const [isOpenModal, setOpenModal] = useState(false);
+    const [isActive, setActive] = useState(null);
+    const [isOpenModal, setOpenModal] = useState(null);
 
     const handlerHamburger = () => {
         setActive(prevState => !prevState)
@@ -17,8 +19,23 @@ function MenuHeader({bgActive}) {
         setOpenModal(prevState => !prevState)
     }
 
-    const handlerSubmitMenuForm = (values) => {
-        console.log('values', values);
+    const handlerSubmitMenuForm = async ({email, password}) => {
+        const requestOptions = {
+            method: 'POST',
+            body: JSON.stringify({
+                email,
+                password,
+                returnSecureToken: true,
+            })
+        };
+        const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCt91QcxAv0f7zM-3pDqEaLqLI5t6HdB2k', requestOptions)
+            .then(res => res.json());
+        console.log("####: response", response);
+        if (response.hasOwnProperty('error')){
+            NotificationManager.error(response.error.message, 'Wrong!');
+        }else {
+            NotificationManager.success('Success login');
+        }
     }
 
     return (
