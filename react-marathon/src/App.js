@@ -12,6 +12,7 @@ import NotFound from "./routes/notFound";
 import ContactPage from "./routes/contact";
 import AboutPage from "./routes/about";
 import Footer from "./components/footer";
+import PrivateRoute from "./components/privateRoute";
 
 import cn from "classnames"
 import 'react-notifications/lib/notifications.css'
@@ -36,8 +37,8 @@ function App() {
                             <Switch>
                                 <Route path="/" exact component={HomePage}/>
                                 <Route path="/home" component={HomePage}/>
-                                <Route path="/game" component={GamePage}/>
-                                <Route path="/about" component={AboutPage}/>
+                                <PrivateRoute path="/game" component={GamePage}/>
+                                <PrivateRoute path="/about" component={AboutPage}/>
                                 <Route path="/contact" component={ContactPage}/>
                                 <Route render={() => (
                                     <Redirect to="/404"/>
