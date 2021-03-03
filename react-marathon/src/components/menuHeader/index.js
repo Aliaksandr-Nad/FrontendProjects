@@ -7,10 +7,14 @@ import Navbar from "../navbar";
 import Modal from "../modal";
 import LoginForm from "../loginForm";
 
+const key = 'AIzaSyCt91QcxAv0f7zM-3pDqEaLqLI5t6HdB2k';
+const registration = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=';
+const login = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=';
+
+
 function MenuHeader({bgActive}) {
     const [isActive, setActive] = useState(null);
     const [isOpenModal, setOpenModal] = useState(null);
-    const [connectionUrl, setConnectionUrl] = useState('');
 
     const handlerHamburger = () => {
         setActive(prevState => !prevState)
@@ -20,11 +24,9 @@ function MenuHeader({bgActive}) {
         setOpenModal(prevState => !prevState)
     }
 
-    const key = 'AIzaSyCt91QcxAv0f7zM-3pDqEaLqLI5t6HdB2k';
-    const reg = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=';
-    const login = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=';
+    const handlerSubmitMenuForm = async ({isNewUser, email, password}) => {
+        const connectionString = isNewUser ? registration + key : login + key;
 
-    const handlerSubmitMenuForm = async ({email, password}) => {
         const requestOptions = {
             method: 'POST',
             body: JSON.stringify({
@@ -33,13 +35,15 @@ function MenuHeader({bgActive}) {
                 returnSecureToken: true,
             })
         };
-        const response = await fetch(login+key, requestOptions)
+
+        const response = await fetch(connectionString, requestOptions)
             .then(res => res.json());
+
         if (response.hasOwnProperty('error')){
             NotificationManager.error(response.error.message, 'Wrong!');
         }else {
             localStorage.setItem('idToken', response.idToken);
-            NotificationManager.success('Success login');
+            NotificationManager.success('Success ' + (isNewUser ? 'register!' : 'login!'));
         }
     }
 
@@ -56,7 +60,7 @@ function MenuHeader({bgActive}) {
                 onClickLogin={handlerClickLogin}
             />
             <Modal
-                title="LOGIN"
+                title="AUTH"
                 isOpen={isOpenModal}
 
                 oncloseModal={handlerClickLogin}

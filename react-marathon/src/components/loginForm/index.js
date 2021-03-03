@@ -5,13 +5,13 @@ import {useEffect} from "react";
 import s from './style.module.css';
 
 
-
 const LoginForm = ({isOpen, onSubmit}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isNewUser, setIsNewUser] = useState(true);
 
     useEffect(() => {
-        if (!isOpen){
+        if (!isOpen) {
             cleanForm();
         }
     }, [isOpen]);
@@ -25,6 +25,7 @@ const LoginForm = ({isOpen, onSubmit}) => {
         event.preventDefault();
 
         onSubmit && onSubmit({
+            isNewUser,
             email,
             password,
         })
@@ -34,8 +35,7 @@ const LoginForm = ({isOpen, onSubmit}) => {
 
     const handlerSwitch = (event) => {
         event.preventDefault();
-        console.log("####: event", event);
-
+        setIsNewUser(prevState => !prevState);
     };
 
     return (
@@ -61,13 +61,13 @@ const LoginForm = ({isOpen, onSubmit}) => {
                 />
             </div>
             <button>
-                Login
+                {isNewUser ? 'signup' : 'signin'}
             </button>
             <span
                 className={s.secondButton}
                 onClick={handlerSwitch}
             >
-                Login
+                {isNewUser ? 'login?' : 'register?'}
             </span>
         </form>
     );
