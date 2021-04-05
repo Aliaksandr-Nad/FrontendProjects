@@ -1,0 +1,38 @@
+.secondButton,
+.secondButton:visited {
+    color: #252934;
+    text-align: center;
+    text-transform: capitalize;
+    font-size: 1rem;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.secondButton,
+.secondButton:visited {
+    color: #252934;
+    font-weight: bold;
+    font-style: italic;
+    outline: none;
+    position: relative;
+    right: -50%;
+}
+
+.secondButton:hover {
+    color: #f300b4;
+    outline: none;
+}
+
+.secondButton:active {
+    color: #f300b4;
+    outline: none;
+}
+
+.secondButton:disabled {
+    opacity: .4;
+    cursor: not-allowed;
+}
+
+.secondButton:disabled:hover {
+    color: #fafafa;
+}
