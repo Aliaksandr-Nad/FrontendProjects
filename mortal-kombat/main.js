@@ -9,7 +9,11 @@ const player1 = {
     weapon: ["A", "B"],
     attack: (name) => {
         console.log(name + ' Fight!');
-    }
+    },
+    changeHP: changeHP,
+    elHP: elHP,
+    renderHP: renderHP,
+
 };
 
 const player2 = {
@@ -20,7 +24,10 @@ const player2 = {
     weapon: ["A", "B"],
     attack: (name) => {
         console.log(name + ' Fight!');
-    }
+    },
+    changeHP: changeHP,
+    elHP: elHP,
+    renderHP: renderHP,
 };
 
 let createElement = (tag, className) => {
@@ -54,19 +61,39 @@ let createPlayer = (playerObj) => {
     return $player;
 };
 
-let changeHP = (player) => {
-    const $playerLife = document.querySelector('.player' + player.player + ' .life');
-    let damage = getRandom();
-    player.hp = player.hp <= damage ? 0 : player.hp - damage;
-    $playerLife.style.width = player.hp + '%';
+let getReloadButton = () => {
+    const $reloadDiv = createElement('div', 'reloadWrap');
+    const $reloadButton = createElement('button', 'button');
+
+    $reloadButton.innerText = 'Restart';
+    $reloadButton.addEventListener('click', () => {
+        window.location.reload();
+    });
+
+    $reloadDiv.appendChild($reloadButton);
+
+    return $reloadDiv;
 }
 
-let getRandom = () => {
-    return Math.ceil(Math.random() * 200);
+function changeHP(damage) {
+    this.hp = this.hp <= damage ? 0 : this.hp - damage;
 }
 
-let showResultText = (name) => {
+function elHP() {
+    return document.querySelector('.player' + this.player + ' .life');
+}
+
+function renderHP() {
+    this.elHP().style.width = this.hp + '%';
+}
+
+let getRandom = (span) => {
+    return Math.ceil(Math.random() * span);
+}
+
+let getResultText = (name) => {
     const $title = createElement('div', 'loseTitle');
+
     if (name) {
         $title.innerText = name + ' Win!';
     } else {
@@ -76,21 +103,28 @@ let showResultText = (name) => {
     return $title;
 }
 
+let showResult = (name) => {
+    $arenas.appendChild(getResultText(name));
+    $randomButton.before(getReloadButton());
+}
 
 $randomButton.addEventListener('click', () => {
-    changeHP(player1);
-    changeHP(player2);
+    player1.changeHP(getRandom(20));
+    player1.renderHP();
+
+    player2.changeHP(getRandom(20));
+    player2.renderHP();
 
     if (player1.hp === 0 || player2.hp === 0) {
         $randomButton.disabled = true;
     }
 
     if (player1.hp === 0 && player1.hp < player2.hp) {
-        $arenas.appendChild(showResultText(player1.name));
+        showResult(player1.name);
     } else if (player2.hp === 0 && player2.hp < player1.hp) {
-        $arenas.appendChild(showResultText(player2.name));
+        showResult(player2.name);
     } else if (player2.hp === 0 && player2.hp === 0) {
-        $arenas.appendChild(showResultText());
+        showResult();
     }
 })
 
