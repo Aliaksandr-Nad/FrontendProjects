@@ -1,5 +1,14 @@
 const $arenas = document.querySelector("div .arenas")
 const $randomButton = document.querySelector(".button")
+const $form = document.querySelector(".control")
+
+const HIT = {
+    head: 30,
+    body: 25,
+    foot: 20,
+}
+
+const ATTACK = ['head', 'body', 'foot'];
 
 const player1 = {
     player: 1,
@@ -10,10 +19,9 @@ const player1 = {
     attack: (name) => {
         console.log(name + ' Fight!');
     },
-    changeHP: changeHP,
-    elHP: elHP,
-    renderHP: renderHP,
-
+    changeHP,
+    elHP,
+    renderHP,
 };
 
 const player2 = {
@@ -25,9 +33,9 @@ const player2 = {
     attack: (name) => {
         console.log(name + ' Fight!');
     },
-    changeHP: changeHP,
-    elHP: elHP,
-    renderHP: renderHP,
+    changeHP,
+    elHP,
+    renderHP,
 };
 
 let createElement = (tag, className) => {
@@ -87,6 +95,11 @@ function renderHP() {
     this.elHP().style.width = this.hp + '%';
 }
 
+let attack = (player, damage) => {
+    player.changeHP(damage);
+    player.renderHP();
+}
+
 let getRandom = (span) => {
     return Math.ceil(Math.random() * span);
 }
@@ -103,22 +116,7 @@ let getResultText = (name) => {
     return $title;
 }
 
-let showResult = (name) => {
-    $arenas.appendChild(getResultText(name));
-    $randomButton.before(getReloadButton());
-}
-
-$randomButton.addEventListener('click', () => {
-    player1.changeHP(getRandom(20));
-    player1.renderHP();
-
-    player2.changeHP(getRandom(20));
-    player2.renderHP();
-
-    if (player1.hp === 0 || player2.hp === 0) {
-        $randomButton.disabled = true;
-    }
-
+let checkResult = () => {
     if (player1.hp === 0 && player1.hp < player2.hp) {
         showResult(player1.name);
     } else if (player2.hp === 0 && player2.hp < player1.hp) {
@@ -126,7 +124,63 @@ $randomButton.addEventListener('click', () => {
     } else if (player2.hp === 0 && player2.hp === 0) {
         showResult();
     }
+}
+
+let showResult = (name) => {
+    $arenas.appendChild(getResultText(name));
+    $form.before(getReloadButton());
+}
+
+$form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const enemy = enemyAttack();
+    const player = playerAttack();
+
+    if (enemy.hit !== player.defence) {
+        attack(player1, enemy.value)
+    }
+
+    if (player.hit !== enemy.defence) {
+        attack(player2, player.value)
+    }
+
+    if (player1.hp === 0 || player2.hp === 0) {
+        $randomButton.disabled = true;
+        checkResult();
+    }
 })
+
+let enemyAttack = () => {
+    const hit = ATTACK[getRandom(3) - 1];
+    const defence = ATTACK[getRandom(3) - 1];
+
+    return {
+        value: getRandom(HIT[hit]),
+        hit,
+        defence
+    }
+}
+
+let playerAttack = () => {
+    let result = {};
+
+    for (let item of $form) {
+        if (item.checked && item.name === 'hit') {
+            result.value = getRandom(HIT[item.value]);
+            result.hit = item.value;
+        }
+
+        if (item.checked && item.name === 'defence') {
+            result.defence = item.value;
+        }
+
+        item.checked = false;
+    }
+
+    return result;
+}
 
 $arenas.appendChild(createPlayer(player1));
 $arenas.appendChild(createPlayer(player2));
+
