@@ -14,11 +14,15 @@ export function renderHP() {
 }
 
 export function takeHit(opponent) {
+    let {name: player1Name, hp: player1HP} = this;
+    let {name: player2Name, attackOption: {value: player2Damage}} = opponent;
+
     if (opponent.attackOption.hit !== this.attackOption.defence) {
         changeHP(this, opponent.attackOption.value);
-        saveLog('hit', this, opponent);
+        player1HP = this.hp;
+        saveLog('hit', player1Name, player1HP, player2Name, player2Damage);
     } else {
-        saveLog('defence', this, opponent);
+        saveLog('defence', player1Name, player1HP, player2Name, player2Damage);
     }
 }
 

@@ -4,14 +4,24 @@ import {$arenas, $form} from '../constants.js';
 import saveLog from './log.js';
 
 
-let checkResult = (player1, player2) => {
-    if (player1.hp === 0 && player1.hp < player2.hp) {
-        showResult(player2.name);
-        saveLog('end', player2, player1);
-    } else if (player2.hp === 0 && player2.hp < player1.hp) {
-        showResult(player1.name);
-        saveLog('end', player1, player2);
-    } else if (player2.hp === 0 && player2.hp === 0) {
+let checkResult = ({
+                       name: player1Name,
+                       hp: player1HP,
+                       attackOption: {value: player1Damage}
+                   } = player1,
+                   {
+                       name: player2Name,
+                       hp: player2HP,
+                       attackOption: {value: player2Damage}
+                   } = player2
+) => {
+    if (player1HP === 0 && player1HP < player2HP) {
+        showResult(player2Name);
+        saveLog('end', player2Name, player2HP, player1Name, player1Damage);
+    } else if (player2HP === 0 && player2HP < player1HP) {
+        showResult(player1Name);
+        saveLog('end', player1Name, player1HP, player2Name, player2Damage);
+    } else if (player2HP === 0 && player2HP === 0) {
         showResult();
         saveLog('draw');
     }

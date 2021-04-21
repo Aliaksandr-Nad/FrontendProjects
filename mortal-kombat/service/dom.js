@@ -6,21 +6,21 @@ let createElement = (tag, className) => {
     return $element;
 }
 
-export let createPlayer = (playerObj) => {
-    const $player = createElement('div', 'player' + playerObj.player);
+export let createPlayer = ({player, name, hp, img}) => {
+    const $player = createElement('div', 'player' + player);
     const $progressbar = createElement('div', 'progressbar');
     const $life = createElement('div', 'life');
-    $life.style.width = playerObj.hp + '%';
+    $life.style.width = hp + '%';
 
     const $name = createElement('div', 'name');
-    $name.innerText = playerObj.name;
+    $name.innerText = name;
 
     $progressbar.appendChild($life);
     $progressbar.appendChild($name);
 
     const $character = createElement('div', 'character');
     const $img = createElement('img');
-    $img.src = playerObj.img;
+    $img.src = img;
 
     $character.appendChild($img);
     $player.appendChild($progressbar);

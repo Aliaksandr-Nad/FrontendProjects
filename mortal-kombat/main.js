@@ -21,7 +21,7 @@ $form.addEventListener('submit', (e) => {
     e.preventDefault();
 
     if (isFirstRound) {
-        saveLog('start', player1, player2);
+        saveLog('start', player1.name, player1.hp, player2.name);
         isFirstRound = false;
     }
 
