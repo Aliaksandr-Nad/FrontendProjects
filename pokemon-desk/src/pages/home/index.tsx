@@ -1,12 +1,18 @@
 import React from 'react';
+import Header from '../../components/header';
+import Button from '../../components/button';
 
 import s from './home.module.scss';
-import Header from '../../components/header';
 
 const HomePage = () => {
   return (
     <div className={s.root}>
       <Header />
+      <Button
+        // eslint-disable-next-line no-console
+        onClick={() => console.log('####: Click')}>
+        See pokemons
+      </Button>
     </div>
   );
 };
