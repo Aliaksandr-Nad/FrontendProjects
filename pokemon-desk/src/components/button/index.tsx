@@ -32,31 +32,31 @@ const Button: React.FC<IButtonProps> = ({ children, onClick, isFullWidth, color,
   let btnColor;
   switch (color) {
     case ButtonColor.Green:
-      btnColor = s['color-green'];
+      btnColor = s.colorGreen;
       break;
     case ButtonColor.Yellow:
-      btnColor = s['color-yellow'];
+      btnColor = s.colorYellow;
       break;
     case ButtonColor.Blue:
-      btnColor = s['color-blue'];
+      btnColor = s.colorBlue;
       break;
     default:
-      btnColor = s['color-green'];
+      btnColor = s.colorGreen;
   }
 
   let btnSize;
   switch (size) {
     case ButtonSize.Small:
-      btnSize = s['size-small'];
+      btnSize = s.sizeSmall;
       break;
     case ButtonSize.Medium:
-      btnSize = s['size-medium'];
+      btnSize = s.sizeMedium;
       break;
     case ButtonSize.Large:
-      btnSize = s['size-large'];
+      btnSize = s.sizeLarge;
       break;
     default:
-      btnSize = s['size-medium'];
+      btnSize = s.sizeMedium;
   }
 
   return (

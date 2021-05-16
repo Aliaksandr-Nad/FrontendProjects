@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface IHeading {
+interface IHeadingProps {
   type: HeadingSize;
 }
 
@@ -14,7 +14,7 @@ enum HeadingSize {
   p,
 }
 
-const Heading: React.FC<IHeading> = ({ children, type }) => {
+const Heading: React.FC<IHeadingProps> = ({ children, type }) => {
   return React.createElement(HeadingSize[type], null, children);
 };
 
