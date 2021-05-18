@@ -23,33 +23,33 @@
   }
 }
 
-.colorGreen {
+.green {
   background: $greenGradient;
 }
 
-.colorYellow {
+.yellow {
   background: $yellowGradient;
 }
 
-.colorBlue {
-  background: $blueGradient;
-}
-
-.fullWidth {
+.full {
   width: 100%;
 }
 
-.sizeSmall {
+.part {
+  width: inherit;
+}
+
+.small {
   font-size: 12px;
   height: 16px;
 }
 
-.sizeMedium {
+.medium {
   font-size: 23px;
   height: 66px;
 }
 
-.sizeLarge {
+.large {
   font-size: 44px;
   height: 96px;
 }
