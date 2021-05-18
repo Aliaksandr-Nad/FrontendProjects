@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { A } from 'hookrouter';
 import s from './header.module.scss';
 
 import { ReactComponent as PokemonLogoSvg } from './assets/logo.svg';
@@ -14,12 +14,12 @@ const MENU: IMenu[] = [
   {
     id: 1,
     value: 'Home',
-    link: '#',
+    link: '/',
   },
   {
     id: 2,
     value: 'Pokédex',
-    link: '#',
+    link: 'pokedex',
   },
   {
     id: 3,
@@ -42,9 +42,9 @@ const Header = () => {
         </div>
         <div className={s.menuWrap}>
           {MENU.map(({ value, link, id }) => (
-            <a key={id} href={link} className={s.menuLink}>
+            <A key={id} href={link} className={s.menuLink}>
               {value}
-            </a>
+            </A>
           ))}
         </div>
       </div>

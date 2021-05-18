@@ -1,8 +1,8 @@
-import React from 'react';
-import HomePage from './pages/home';
+import { useRoutes } from 'hookrouter';
+import routes from './routes';
 
 const App = () => {
-  return <HomePage />;
+  return useRoutes(routes);
 };
 
 export default App;
