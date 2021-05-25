@@ -1,9 +1,9 @@
 import React from 'react';
 import cn from 'classnames';
 
-import Heading from '../heading';
-
 import { pokemonTypes } from '../../interface/pokemons';
+
+import Heading from '../heading';
 
 import s from './style.module.scss';
 
