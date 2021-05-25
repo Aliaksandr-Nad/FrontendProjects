@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
+import useData from '../../hook/getData';
+import useDebounce from '../../hook/useDebounce';
+
+import { IGetPokemonsResponse, PokemonRequest } from '../../interface/pokemons';
+
 import PokemonCard from '../../components/pokemonCard';
 import Layout from '../../components/layout';
 import Heading from '../../components/heading';
 
 import s from './style.module.scss';
-import useData from '../../hook/getData';
-import { IGetPokemonsResponse, PokemonRequest } from '../../interface/pokemons';
 
 interface Props {
   title?: string;
@@ -18,12 +21,13 @@ interface IQuery {
 const PokedexPage: React.FC<Props> = ({ title }) => {
   const [searchValue, setSearchValue] = useState('');
   const [query, setQuery] = useState<IQuery>({});
+  const debouncedValue = useDebounce(searchValue, 500);
 
   const {
     data: { total, pokemons },
     isLoading,
     isError,
-  } = useData<IGetPokemonsResponse>('getPokemons', query, [searchValue]);
+  } = useData<IGetPokemonsResponse>('getPokemons', query, [debouncedValue]);
 
   if (isLoading) {
     return <div>Loadind...</div>;
