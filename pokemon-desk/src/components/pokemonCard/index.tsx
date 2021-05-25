@@ -1,4 +1,6 @@
 import React from 'react';
+import cn from 'classnames';
+
 import Heading from '../heading';
 
 import s from './style.module.scss';
@@ -8,9 +10,30 @@ interface IPokemonCard {
   name: string;
   attack: number;
   defense: number;
-  types: string[];
+  types: pokemonTypes[];
   img: string;
 }
+
+export type pokemonTypes =
+  | 'bug'
+  | 'dark'
+  | 'dragon'
+  | 'electric'
+  | 'fairy'
+  | 'fighting'
+  | 'fire'
+  | 'flying'
+  | 'ghost'
+  | 'gosth'
+  | 'grass'
+  | 'ground'
+  | 'ice'
+  | 'normal'
+  | 'poison'
+  | 'psychic'
+  | 'rock'
+  | 'stile'
+  | 'water';
 
 const PokemonCard: React.FC<IPokemonCard> = ({ id, name, attack, defense, types, img }) => {
   return (
@@ -31,7 +54,9 @@ const PokemonCard: React.FC<IPokemonCard> = ({ id, name, attack, defense, types,
         </div>
         <div className={s.labelWrap}>
           {types.map((type) => (
-            <span className={s.label}>{type}</span>
+            <span key={type} className={cn(s.label, s[type])}>
+              {type}
+            </span>
           ))}
         </div>
       </div>
