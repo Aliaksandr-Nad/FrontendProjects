@@ -3,6 +3,8 @@ import cn from 'classnames';
 
 import Heading from '../heading';
 
+import { pokemonTypes } from '../../interface/pokemons';
+
 import s from './style.module.scss';
 
 interface IPokemonCard {
@@ -13,27 +15,6 @@ interface IPokemonCard {
   types: pokemonTypes[];
   img: string;
 }
-
-export type pokemonTypes =
-  | 'bug'
-  | 'dark'
-  | 'dragon'
-  | 'electric'
-  | 'fairy'
-  | 'fighting'
-  | 'fire'
-  | 'flying'
-  | 'ghost'
-  | 'gosth'
-  | 'grass'
-  | 'ground'
-  | 'ice'
-  | 'normal'
-  | 'poison'
-  | 'psychic'
-  | 'rock'
-  | 'stile'
-  | 'water';
 
 const PokemonCard: React.FC<IPokemonCard> = ({ id, name, attack, defense, types, img }) => {
   return (
