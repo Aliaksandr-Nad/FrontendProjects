@@ -13,7 +13,7 @@ const App = () => {
       {match}
     </>
   ) : (
-    <PokedexPage title="404" />
+    <PokedexPage />
   );
 };
 

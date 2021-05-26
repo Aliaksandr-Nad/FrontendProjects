@@ -14,11 +14,15 @@ interface IPokemonCard {
   defense: number;
   types: pokemonTypes[];
   img: string;
+  // onClick: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 const PokemonCard: React.FC<IPokemonCard> = ({ id, name, attack, defense, types, img }) => {
   return (
-    <div className={s.root}>
+    <div
+      className={s.root}
+      // onClick={() => navigate(LinkEnum.POKEMON, true, {id: id})}
+    >
       <div className={s.infoWrap}>
         <Heading className={s.titleName} type="h4">
           {name}

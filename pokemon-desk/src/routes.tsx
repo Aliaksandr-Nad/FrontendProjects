@@ -26,17 +26,17 @@ export const GENERAL_MENU: IGeneralMenu[] = [
   {
     title: 'Pokédex',
     link: LinkEnum.POKEDEX,
-    component: () => <PokedexPage title="Pokédex" />,
+    component: () => <PokedexPage />,
   },
   {
     title: 'Legendaries',
     link: LinkEnum.LEGENDARIES,
-    component: () => <PokedexPage title="Legendaries" />,
+    component: () => <PokedexPage />,
   },
   {
     title: 'Documentation',
     link: LinkEnum.DOCUMENTATION,
-    component: () => <PokedexPage title="Documentation" />,
+    component: () => <PokedexPage />,
   },
 ];
 
