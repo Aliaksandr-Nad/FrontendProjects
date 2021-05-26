@@ -9,17 +9,14 @@ import Layout from '../../components/layout';
 import Heading from '../../components/heading';
 
 import s from './style.module.scss';
-
-interface Props {
-  title?: string;
-}
+import SearchBar from '../../components/searchBar';
 
 interface IQuery {
   name?: string;
 }
 
-const PokedexPage: React.FC<Props> = ({ title }) => {
-  const [searchValue, setSearchValue] = useState('');
+const PokedexPage = () => {
+  const [searchValue, setSearchValue] = useState('Encuentra tu pokémon...');
   const [query, setQuery] = useState<IQuery>({});
   const debouncedValue = useDebounce(searchValue, 500);
 
@@ -47,22 +44,19 @@ const PokedexPage: React.FC<Props> = ({ title }) => {
 
   return (
     <>
-      <div>
-        <Heading type="h1">{total}</Heading>
-        <Heading type="h1">{title}</Heading>
-      </div>
-      <div>
-        <input type="text" value={searchValue} onChange={handleSearchChange} />
-      </div>
-      <div>
-        <Layout className={s.contentWrap}>
+      <Layout className={s.root}>
+        <Heading type="h3">
+          {total} <b>Pokemons</b> for you to choose your favorite
+        </Heading>
+        <SearchBar value={searchValue} onChange={handleSearchChange} />
+        <div className={s.contentWrap}>
           {!isLoading &&
             pokemons &&
             pokemons.map(({ id, name, stats: { attack, defense }, types, img }: PokemonRequest) => (
               <PokemonCard key={id} id={id} name={name} attack={attack} defense={defense} types={types} img={img} />
             ))}
-        </Layout>
-      </div>
+        </div>
+      </Layout>
     </>
   );
 };
