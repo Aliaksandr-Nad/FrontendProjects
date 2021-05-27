@@ -1,5 +1,10 @@
 @import '../../varibales';
 
+.root {
+  min-height: 100vh;
+  background: linear-gradient(180deg, $greyGradient 30.32%, $white-light 100%);
+}
+
 .contentWrap {
   display: grid;
   grid-template-columns: auto auto auto;
