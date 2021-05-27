@@ -10,9 +10,6 @@ interface IConfig {
         uri: {
           pathname: string;
         };
-        query: {
-          [n: string]: string | number;
-        };
       };
     };
   };
@@ -30,8 +27,11 @@ export const config: IConfig = {
         uri: {
           pathname: '/api/v1/pokemons',
         },
-        query: {
-          limit: 25,
+      },
+      getPokemon: {
+        method: 'GET',
+        uri: {
+          pathname: '/api/v1/pokemon/{id]',
         },
       },
     },
