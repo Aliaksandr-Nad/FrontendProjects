@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import useData from '../../hook/getData';
 import useDebounce from '../../hook/useDebounce';
 
@@ -7,20 +8,30 @@ import { IGetPokemonsResponse, PokemonRequest } from '../../interface/pokemons';
 import PokemonCard from '../../components/pokemonCard';
 import Layout from '../../components/layout';
 import Heading from '../../components/heading';
+import SearchBar from '../../components/searchBar';
+
+import { ConfigEndpoint } from '../../config';
+import { getTypesAction } from '../../store/pokemon';
 
 import s from './style.module.scss';
-import SearchBar from '../../components/searchBar';
 
 interface IQuery {
   name?: string;
 }
 
 const PokedexPage = () => {
+  const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState('Encuentra tu pokémon...');
   const [query, setQuery] = useState<IQuery>({});
   const debouncedValue = useDebounce(searchValue, 500);
 
-  const { data, isLoading, isError } = useData<IGetPokemonsResponse>('getPokemons', query, [debouncedValue]);
+  const { data, isLoading, isError } = useData<IGetPokemonsResponse>(ConfigEndpoint.GET_POKEMONS, query, [
+    debouncedValue,
+  ]);
+
+  useEffect(() => {
+    dispatch(getTypesAction());
+  }, []);
 
   if (isLoading) {
     return <div>Loadind...</div>;

@@ -1,7 +1,12 @@
+/*eslint-disable */
 import React from 'react';
 import cn from 'classnames';
+import useData from '../../hook/getData';
 
 import Heading from '../../components/heading';
+
+import { PokemonRequest } from '../../interface/pokemons';
+import { ConfigEndpoint } from '../../config';
 
 import s from './style.module.scss';
 
@@ -39,7 +44,7 @@ const Pokemon: React.FC<PokemonProps> = ({ id }) => {
 
         <div className={s.typeWrap}>
           {pokemons.types.map((type) => (
-            <span key={type} className={cn(s.label, s[type])}>
+            <span key={type} className={cn(s.label, s[type as keyof typeof s])}>
               {type}
             </span>
           ))}

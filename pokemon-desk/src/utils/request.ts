@@ -1,5 +1,6 @@
 import Url from 'url';
 import getUrlWithParamsConfig from './getUrlWithParamsConfig';
+import { ConfigEndpoint } from '../config';
 
 interface IOptions {
   method: string;
@@ -12,7 +13,7 @@ interface IGetUrlWithParamsConfig {
   body: object;
 }
 
-async function req<T>(endpoint: string, query: object): Promise<T> {
+async function req<T>(endpoint: ConfigEndpoint, query: object = {}): Promise<T> {
   const { method, uri, body }: IGetUrlWithParamsConfig = getUrlWithParamsConfig(endpoint, query);
 
   const options: IOptions = {
