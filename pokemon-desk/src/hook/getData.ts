@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import req from '../utils/request';
-import { IGetPokemonsResponse } from '../interface/pokemons';
 
 const useData = <T>(endpoint: string, query: object, deps: any[] = []) => {
-  const [data, setData] = useState<T | IGetPokemonsResponse>({ total: 0, pokemons: [] });
+  const [data, setData] = useState<T | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError, setIsError] = useState<boolean>(false);
 

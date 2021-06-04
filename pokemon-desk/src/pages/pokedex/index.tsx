@@ -20,11 +20,7 @@ const PokedexPage = () => {
   const [query, setQuery] = useState<IQuery>({});
   const debouncedValue = useDebounce(searchValue, 500);
 
-  const {
-    data: { total, pokemons },
-    isLoading,
-    isError,
-  } = useData<IGetPokemonsResponse>('getPokemons', query, [debouncedValue]);
+  const { data, isLoading, isError } = useData<IGetPokemonsResponse>('getPokemons', query, [debouncedValue]);
 
   if (isLoading) {
     return <div>Loadind...</div>;
@@ -46,13 +42,13 @@ const PokedexPage = () => {
     <>
       <Layout className={s.root}>
         <Heading type="h3">
-          {total} <b>Pokemons</b> for you to choose your favorite
+          {data?.total} <b>Pokemons</b> for you to choose your favorite
         </Heading>
         <SearchBar value={searchValue} onChange={handleSearchChange} />
         <div className={s.contentWrap}>
           {!isLoading &&
-            pokemons &&
-            pokemons.map(({ id, name, stats: { attack, defense }, types, img }: PokemonRequest) => (
+            data?.pokemons &&
+            data?.pokemons.map(({ id, name, stats: { attack, defense }, types, img }: PokemonRequest) => (
               <PokemonCard key={id} id={id} name={name} attack={attack} defense={defense} types={types} img={img} />
             ))}
         </div>
