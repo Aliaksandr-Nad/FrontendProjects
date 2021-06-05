@@ -1,4 +1,4 @@
-import config from '../config';
+import config, { ConfigEndpoint } from '../config';
 
 interface IApiConfigUri {
   host: string;
@@ -15,7 +15,7 @@ interface IEndpoint {
   };
 }
 
-const getUrlWithParamsConfig = (endPointConfig: string, params: object) => {
+const getUrlWithParamsConfig = (endPointConfig: ConfigEndpoint, params: object = {}) => {
   const { method, uri }: IEndpoint = config.client.endpoint[endPointConfig as keyof typeof config.client.endpoint];
   let body = {};
 

@@ -73,3 +73,5 @@ const pokemonsData = {
 };
 
 export type PokemonRequestExample = typeof pokemonsData;
+
+export type ITypeRequest = string[];
