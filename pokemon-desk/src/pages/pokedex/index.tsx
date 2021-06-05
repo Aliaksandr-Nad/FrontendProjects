@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import useData from '../../hook/getData';
 import useDebounce from '../../hook/useDebounce';
 
@@ -11,7 +11,7 @@ import Heading from '../../components/heading';
 import SearchBar from '../../components/searchBar';
 
 import { ConfigEndpoint } from '../../config';
-import { getTypesAction } from '../../store/pokemon';
+import { getPokemonsTypes, getTypesAction } from '../../store/pokemon';
 
 import s from './style.module.scss';
 
@@ -21,6 +21,7 @@ interface IQuery {
 
 const PokedexPage = () => {
   const dispatch = useDispatch();
+  const pokemonTypes = useSelector(getPokemonsTypes);
   const [searchValue, setSearchValue] = useState('Encuentra tu pokémon...');
   const [query, setQuery] = useState<IQuery>({});
   const debouncedValue = useDebounce(searchValue, 500);
@@ -52,6 +53,9 @@ const PokedexPage = () => {
   return (
     <>
       <Layout className={s.root}>
+        {pokemonTypes?.map((type) => (
+          <Heading type="h5">{type}</Heading>
+        ))}
         <Heading type="h3">
           {data?.total} <b>Pokemons</b> for you to choose your favorite
         </Heading>
